@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>幸运大转盘</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script>
+       
+       ;(function(doc, win) {
+           var docEle = doc.documentElement,
+               dpr = Math.min(win.devicePixelRatio, 3);;
+           scale = 1/dpr,
+               resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize';
+           docEle.dataset.dpr = dpr;
+           var metaEle = doc.createElement('meta');
+           metaEle.name = 'viewport';
+           metaEle.content = 'width=device-width,initial-scale=' + scale + ',maximum-scale=' + scale + ',user-scalable=no,minimal-ui';
+           docEle.firstElementChild.appendChild(metaEle);
+           var recalCulate = function() {
+               var width = docEle.clientWidth;
+               if(width / dpr > 750) {
+                   width = 750 * dpr;
+               }
+       
+               docEle.style.fontSize = 100 * (width / 750) + 'px';
+           };
+           recalCulate();
+           if(!doc.addEventListener) return;
+           win.addEventListener(resizeEvent, recalCulate, false);
+           
+       })(document, window);
+    </script>
+</head>
+<body>
+
+    <div class="game">
+        <div class="title">
+            <img src="./images/game-title.png" alt="">
+        </div>
+        <div class="luckDrawCount">你有<span>1</span>次抽奖机会</div>
+        <div class="luckDrawGift"></div>
+        <div class="Gift"></div>
+        <div class="luckDrawTime">活动时间：早上10:00分~10:30分，<br/>下午15:30分~16:00分</div>
+        <div class="wheel-box" >
+                
+            <div id="wheel" style="position: relative;">
+				<canvas id="my-canvas-bg" style="position: absolute; width: 320px; height: 320px; left: -10px; top: -10px;" ></canvas>
+				<canvas id="my-canvas" style="opacity: 0; position: absolute; width: 100%;  background: #FFFFFF; color: black;"></canvas>
+			</div>
+            <div id="arrow"></div>
+        </div>
+		<div id="footer">本次活动最终解释权归广州汉光电气股份有限公司所有</div>
+    </div>
+    
+</body>
+<script src="js/game.js"></script>
+</html>
